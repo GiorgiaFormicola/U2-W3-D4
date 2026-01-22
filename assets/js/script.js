@@ -66,4 +66,11 @@ allEditButtons.forEach((button, i) => {
   });
 });
 
-getImages("tigers");
+// Add search bar to search custom images
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const searchInput = document.getElementById("search").value;
+  getImages(searchInput);
+});
