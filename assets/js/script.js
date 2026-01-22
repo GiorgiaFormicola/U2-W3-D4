@@ -21,6 +21,7 @@ const getImages = function (string) {
 
       const photosArray = album.photos;
       const allCardImages = document.querySelectorAll("img");
+      const allCardBadges = document.querySelectorAll("small");
 
       photosArray.forEach((photo, i) => {
         if (i < 9) {
@@ -28,6 +29,10 @@ const getImages = function (string) {
           const landscapeSRC = photoSRC.landscape;
           const cardImage = allCardImages[i];
           cardImage.setAttribute("src", landscapeSRC);
+
+          const photoID = photo.id;
+          const cardBadge = allCardBadges[i];
+          cardBadge.innerText = `ID ${photoID}`;
         }
       });
     })
@@ -38,15 +43,15 @@ const getImages = function (string) {
 };
 
 // add events listeners to buttonss
-const primaryLoadButton = document.getElementById("primaryLoadButton");
-primaryLoadButton.addEventListener("click", () => {
-  getImages("hamsters");
-});
+// const primaryLoadButton = document.getElementById("primaryLoadButton");
+// primaryLoadButton.addEventListener("click", () => {
+//   getImages("hamsters");
+// });
 
-const secondaryLoadButton = document.getElementById("secondaryLoadButton");
-secondaryLoadButton.addEventListener("click", () => {
-  getImages("tigers");
-});
+// const secondaryLoadButton = document.getElementById("secondaryLoadButton");
+// secondaryLoadButton.addEventListener("click", () => {
+//   getImages("tigers");
+// });
 
 // change EDIT button to HIDE button and make it active
 const allEditButtons = document.querySelectorAll(".card button:nth-of-type(2)");
@@ -60,3 +65,5 @@ allEditButtons.forEach((button, i) => {
     card.classList.add("d-none");
   });
 });
+
+getImages("tigers");
