@@ -2,6 +2,7 @@ const APIkey = "0VmFaORh2fcZ7J2rf5cLewQnaYkwa97br8QPHSxxWCq6Kk6tFnE5qfHq"; //Aut
 
 const pexelsURL = "https://api.pexels.com/v1/search?query="; // Pexels generic search URL
 
+// GET request to Pexels to substitute images
 const getImages = function (string) {
   fetch(pexelsURL + string, {
     headers: {
@@ -19,7 +20,6 @@ const getImages = function (string) {
       console.log(album);
 
       const photosArray = album.photos;
-
       const allCardImages = document.querySelectorAll("img");
 
       photosArray.forEach((photo, i) => {
@@ -37,6 +37,7 @@ const getImages = function (string) {
     });
 };
 
+// add events listeners to buttonss
 const primaryLoadButton = document.getElementById("primaryLoadButton");
 primaryLoadButton.addEventListener("click", () => {
   getImages("hamsters");
@@ -45,4 +46,17 @@ primaryLoadButton.addEventListener("click", () => {
 const secondaryLoadButton = document.getElementById("secondaryLoadButton");
 secondaryLoadButton.addEventListener("click", () => {
   getImages("tigers");
+});
+
+// change EDIT button to HIDE button and make it active
+const allEditButtons = document.querySelectorAll(".card button:nth-of-type(2)");
+const allCards = document.querySelectorAll(".album .col-md-4");
+
+allEditButtons.forEach((button, i) => {
+  button.innerText = "Hide";
+  const card = allCards[i];
+
+  button.addEventListener("click", function () {
+    card.classList.add("d-none");
+  });
 });
