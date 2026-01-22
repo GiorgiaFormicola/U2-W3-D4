@@ -42,16 +42,16 @@ const getImages = function (string) {
     });
 };
 
-// add events listeners to buttonss
-// const primaryLoadButton = document.getElementById("primaryLoadButton");
-// primaryLoadButton.addEventListener("click", () => {
-//   getImages("hamsters");
-// });
+//add events listeners to buttonss
+const primaryLoadButton = document.getElementById("primaryLoadButton");
+primaryLoadButton.addEventListener("click", () => {
+  getImages("hamsters");
+});
 
-// const secondaryLoadButton = document.getElementById("secondaryLoadButton");
-// secondaryLoadButton.addEventListener("click", () => {
-//   getImages("tigers");
-// });
+const secondaryLoadButton = document.getElementById("secondaryLoadButton");
+secondaryLoadButton.addEventListener("click", () => {
+  getImages("tigers");
+});
 
 // change EDIT button to HIDE button and make it active
 const allEditButtons = document.querySelectorAll(".card button:nth-of-type(2)");
