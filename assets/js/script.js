@@ -8,6 +8,8 @@ const allCardsTitles = document.querySelectorAll(".album .col-md-4 h5");
 const allCardBadges = document.querySelectorAll("small");
 const allCardsBodies = document.querySelectorAll(".card-body");
 const allCardParagraphs = document.querySelectorAll(".album .col-md-4 p");
+const allViewButtons = document.querySelectorAll(".card button:nth-of-type(1)");
+allViewButtons.forEach((button) => {});
 
 allCards.forEach((card, i) => {
   card.classList.add("d-flex");
@@ -23,6 +25,10 @@ allCards.forEach((card, i) => {
 
   const cardParagraph = allCardParagraphs[i];
   cardParagraph.classList.add("flex-grow-1");
+
+  const viewButton = allViewButtons[i];
+  viewButton.setAttribute("data-bs-toggle", "modal");
+  viewButton.setAttribute("data-bs-target", "#exampleModal");
 });
 
 // create a function that displays all cards again after being hidden
@@ -43,6 +49,7 @@ const getImages = function (string) {
       if (response.ok) {
         return response.json();
       } else {
+        button;
         throw new Error("Error in getting images from pexels");
       }
     })
@@ -68,6 +75,21 @@ const getImages = function (string) {
 
           const cardParagraph = allCardParagraphs[i];
           cardParagraph.innerText = `${photoDescription}`;
+
+          const viewButton = allViewButtons[i];
+
+          viewButton.addEventListener("click", () => {
+            const modalTitle = document.querySelector(".modal-title");
+            modalTitle.innerHTML = `Photo ${[i + 1]}`;
+            // modalTitle.innerHTML = `${photoDescription}`;
+
+            const modalImg = document.querySelector(".modal-body img");
+            modalImg.src = landscapeSRC;
+            modalImg.alt = photoDescription;
+
+            const modalCaption = document.querySelector(".modal-footer p");
+            modalCaption.innerHTML = `${photoDescription}`;
+          });
         }
       });
     })
@@ -77,7 +99,7 @@ const getImages = function (string) {
     });
 };
 
-//add events listeners to buttonss
+//add events listeners to buttons
 const primaryLoadButton = document.getElementById("primaryLoadButton");
 primaryLoadButton.addEventListener("click", () => {
   getImages("dolphins");
@@ -114,3 +136,21 @@ form.addEventListener("submit", function (e) {
 
 // start browser with random images
 getImages("random");
+
+// const exampleModal = document.getElementById("exampleModal");
+// if (exampleModal) {
+//   exampleModal.addEventListener("show.bs.modal", (event) => {
+//     // Button that triggered the modal
+//     const button = event.relatedTarget;
+//     // Extract info from data-bs-* attributes
+//     const recipient = button.getAttribute("data-bs-whatever");
+//     // If necessary, you could initiate an Ajax request here
+//     // and then do the updating in a callback.
+
+//     // Update the modal's content.
+//     const modalTitle = exampleModal.querySelector(".modal-title");
+//     const modalBodyInput = exampleModal.querySelector(".modal-body input");
+
+//     modalTitle.innerText = `Photo ${[i + 1]}`;
+//   });
+// }
