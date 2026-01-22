@@ -22,6 +22,7 @@ const getImages = function (string) {
       const photosArray = album.photos;
       const allCardImages = document.querySelectorAll("img");
       const allCardBadges = document.querySelectorAll("small");
+      const allCardParagraphs = document.querySelectorAll(".album .col-md-4 p");
 
       photosArray.forEach((photo, i) => {
         if (i < 9) {
@@ -30,9 +31,15 @@ const getImages = function (string) {
           const cardImage = allCardImages[i];
           cardImage.setAttribute("src", landscapeSRC);
 
+          const photoDescription = photo.alt;
+          cardImage.setAttribute("alt", photoDescription);
+
           const photoID = photo.id;
           const cardBadge = allCardBadges[i];
           cardBadge.innerText = `ID ${photoID}`;
+
+          const cardParagraph = allCardParagraphs[i];
+          cardParagraph.innerText = `${photoDescription}`;
         }
       });
     })
@@ -45,7 +52,7 @@ const getImages = function (string) {
 //add events listeners to buttonss
 const primaryLoadButton = document.getElementById("primaryLoadButton");
 primaryLoadButton.addEventListener("click", () => {
-  getImages("hamsters");
+  getImages("dolphins");
 });
 
 const secondaryLoadButton = document.getElementById("secondaryLoadButton");
@@ -73,4 +80,16 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
   const searchInput = document.getElementById("search").value;
   getImages(searchInput);
+});
+
+// change CARD TITLE inner text
+const allCardsTitles = document.querySelectorAll(".album .col-md-4 h5");
+const allCardBadges = document.querySelectorAll("small");
+
+allCards.forEach((title, i) => {
+  const cardTitle = allCardsTitles[i];
+  cardTitle.innerText = `Photo ${i + 1}`;
+
+  const cardBadge = allCardBadges[i];
+  cardBadge.innerText = `ID ...`;
 });
